@@ -30,7 +30,13 @@ socket.on('message', function(event) {
 });
 
 function help() {
+    socket.send('Help:');
+    socket.send('* load(window, url) ex: load(0, "http://www.google.fr")');
     socket.send('* help');
+}
+
+function load(window, src) {
+    $('#' + window).attr('src', src)
 }
 </script>
         <iframe id="1" scrolling="no" src="/black"></iframe>
