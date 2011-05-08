@@ -28,20 +28,33 @@ socket.connect();
 socket.on('message', function(event) {
     eval(event);
 });
+var refreshIframe = new Array();
 
 function help() {
     socket.send('Help:');
-    socket.send('* load(window, url) ex: load(0, "http://www.google.fr")');
+    socket.send('* load(window, url, refresh_interval) ex: load(0, "http://www.debian.org", 5)');
     socket.send('* help');
 }
 
-function load(window, src) {
-    $('#' + window).attr('src', src)
+function load(window, src, refresh) {
+    if (refreshIframe[window] != null) {
+        clearInterval(refreshIframe[window] );
+        refreshIframe[window] = null;
+    }
+    $('#window' + window).attr('src', src);
+    if (refresh != 0) {
+        refreshIframe[window] = setInterval("refresh(" + window + ")", refresh * 1000);
+    }
+}
+
+function refresh(window) {
+    var w = $('#window' + window);
+    w.attr('src', w.attr('src'));
 }
 </script>
-        <iframe id="1" scrolling="no" src="/black"></iframe>
-        <iframe id="2" scrolling="no" src="/black"></iframe>
-        <iframe id="3" scrolling="no" src="/black"></iframe>
-        <iframe id="4" scrolling="no" src="/black"></iframe>
+        <iframe id="window1" scrolling="no" src="/black"></iframe>
+        <iframe id="window2" scrolling="no" src="/black"></iframe>
+        <iframe id="window3" scrolling="no" src="/black"></iframe>
+        <iframe id="window4" scrolling="no" src="/black"></iframe>
     </body>
 </html>
