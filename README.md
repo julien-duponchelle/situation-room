@@ -27,6 +27,7 @@ Open the browser on http://127.0.0.1:4001
 Connect to IRC and send your commands:
 
 > load(2, 'http://www.openbsd.org')
+
 > load(1, 'http://www.nagios.org', 5)
 
 This open OpenBSD.org website in 2 second windows of the tactical view and nagios.org in the first window.
