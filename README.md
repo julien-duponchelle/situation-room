@@ -5,7 +5,7 @@ Situation Room is a software which help you to display multiple webpage on a mon
 control display from IRC. It's usefull for IT team in order to create tactical display
 pilot by the team.
 
-<img src="http://upload.wikimedia.org/wikipedia/commons/4/45/ISS_Flight_Control_Room_2006.jpg" width="400px">
+<img src="http://upload.wikimedia.org/wikipedia/commons/4/45/ISS_Flight_Control_Room_2006.jpg" width="800px">
 
 Installation
 -------------
