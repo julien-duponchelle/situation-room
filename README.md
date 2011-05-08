@@ -2,7 +2,7 @@ Situation Room
 ===============
 
 Situation Room is a software which help you to display multiple webpage on a monitor and
-control display from IRC. It's usefull for IT team in order to create tactical display
+control display from web. It's usefull for IT team in order to create tactical display
 pilot by the team.
 
 <img src="http://upload.wikimedia.org/wikipedia/commons/4/45/ISS_Flight_Control_Room_2006.jpg" width="800px">
@@ -12,8 +12,7 @@ Installation
 
 * Install node.js
 * Install npm
-
-* Use install.sh for install dependencies.
+* npm install socket.io 
 
 Configure
 ---------
@@ -24,24 +23,9 @@ Usage
 ----
 node server.js
 
-Open the browser on http://127.0.0.1:4001
+Open the browser which should display the tactical view on http://127.0.0.1:4001
 
-Connect to IRC and send your commands:
-
-> load(2, 'http://www.openbsd.org')
-
-> load(1, 'http://www.nagios.org', 5)
-
-This open OpenBSD.org website in 2 second windows of the tactical view and nagios.org in the first window.
-Nagios will be refresh each 5 seconds.
-
-> fullscreen(2)
-
-This display the openbsd.org website in fullscreen mode. 
-
-> mosaic()
-
-This return to the mosaic view.
+Open the console via http://127.0.0.1:4000
 
 Licence
 --------

@@ -1,9 +1,5 @@
 SETTINGS = {
-    PORT: 4001,
-    IRC: {
-        server: 'irc.freenode.org',
-        nick: 'situationbot',
-        channel: '#situationwhitehouse'
-    }
+    CONSOLE_PORT: 4000,
+    MONITOR_PORT: 4001,
 }
 

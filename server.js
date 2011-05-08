@@ -16,7 +16,37 @@ var http = require('http'),
 
 var settings = require('./config')
 
-server = http.createServer(function(request, response) {  
+console_server = http.createServer(function(request, response) {  
+    var uri = url.parse(request.url).pathname;
+    if (uri == "/") {
+        uri = "/console.html";
+    }
+    var filename = path.join(process.cwd(), uri);
+    path.exists(filename, function(exists) {  
+        if(!exists) {  
+            response.writeHead(404, {"Content-Type": "text/plain"});  
+            response.write("404 Not Found\n");  
+            response.end();  
+            return;  
+        }  
+  
+        fs.readFile(filename, "binary", function(err, file) {  
+            if(err) {  
+                response.writeHead(500, {"Content-Type": "text/plain"});
+                response.write(err + "\n");
+                response.end();
+                return;  
+            }  
+  
+            response.writeHead(200);
+            response.write(file, "binary");
+            response.end();
+        });
+    });
+})
+console_server.listen(SETTINGS.CONSOLE_PORT);
+
+monitor_server = http.createServer(function(request, response) {  
     var uri = url.parse(request.url).pathname;
     if (uri == "/") {
         uri = "/index.html";
@@ -38,31 +68,26 @@ server = http.createServer(function(request, response) {
   
         fs.readFile(filename, "binary", function(err, file) {  
             if(err) {  
-                response.writeHead(500, {"Content-Type": "text/plain"});  
-                response.write(err + "\n");  
-                response.end();  
+                response.writeHead(500, {"Content-Type": "text/plain"});
+                response.write(err + "\n");
+                response.end();
                 return;  
             }  
   
-            response.writeHead(200);  
-            response.write(file, "binary");  
-            response.end();  
-        });  
-    });  
+            response.writeHead(200);
+            response.write(file, "binary");
+            response.end();
+        });
+    });
 })
-server.listen(SETTINGS.PORT);
+monitor_server.listen(SETTINGS.MONITOR_PORT);
 
 var monitor = null;
-var irc = null;
-var socket = io.listen(server); 
-socket.on('connection', function(client){ 
+var socket_monitor = io.listen(monitor_server); 
+socket_monitor.on('connection', function(client){ 
     sys.puts('Monitor connected');
     monitor = client;
     client.on('message' , function(event) {
-        console.log(event);
-        if (irc != null) {
-            irc.privmsg(SETTINGS.IRC.channel, event);
-        }
     });
     client.on('disconnect', function() {
         monitor = null;
@@ -70,12 +95,20 @@ socket.on('connection', function(client){
     });
 }); 
 
-irc = new IRC( SETTINGS.IRC );
-irc.connect(function () {
-    irc.join(SETTINGS.IRC.channel);
-    irc.addListener('privmsg', function (event) {
+var console_client = null;
+var socket_console = io.listen(console_server); 
+socket_console.on('connection', function(client){ 
+    sys.puts('Console connected');
+    console_client = client;
+    client.on('message' , function(event) {
+        console.log(event);
         if (monitor != null) {
-            monitor.send(event['params'][1])
+            monitor.send(event);
         }
     });
-});
+    client.on('disconnect', function() {
+        console_client = null;
+        sys.puts('Console disconnected');
+    });
+}); 
+
