@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Situation Room Console</title>
+    <style>
+body {
+    background-color: black;
+    color: white;
+    font-size: 15px;
+}
+</style>
+<script src="/socket.io/socket.io.js""></script>
+<script src="/config.js"></script>
+<script src="/jquery-1.6.min.js"></script>
+<script>
+var socket = new io.Socket("127.0.0.1", {port: SETTINGS.CONSOLE_PORT}); 
+socket.connect();
+socket.on('message', function(event) {
+});
+
+function full(window) {
+    socket.send("full(" + window + ")");
+    return false;
+}
+
+function change(window) {
+    socket.send("load(" + window + ", '" + $('#url' + window).val() + "'," + $('#refresh' + window).val()  + ")");
+    return false;
+}
+
+function mosaic() {
+    socket.send("mosaic()");
+}
+</script>
+</head>
+<body>
+<h1>Situation Room</h1>
+<input type="button" onclick="mosaic()" value="Mosaic"/>
+<table>
+    <thead>
+        <tr>
+            <th>Window</th>
+            <th>Url</th>
+            <th>Refresh</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <form onsubmit="return change(1);">
+        <tr>
+            <td>1</td>
+            <td><input type="text" id="url1" size="100"/></td>
+            <td><input type="text" id="refresh1" value="0"/></td>
+            <td>
+                <input type="submit" value="Change"/>       
+                <input type="button" onclick="full(1)" value="Fullscreen"/>
+            </td>
+        </tr>
+        </form>
+        <form onsubmit="return change(2);">
+        <tr>
+            <td>2</td>
+            <td><input type="text" id="url2" size="100"/></td>
+            <td><input type="text" id="refresh2" value="0"/></td>
+            <td>
+                <input type="submit" value="Change"/>       
+                <input type="button" onclick="full(2)" value="Fullscreen"/>
+            </td>
+        </tr>
+        </form>
+        <form onsubmit="return change(3);">
+        <tr>
+            <td>3</td>
+            <td><input type="text" id="url3" size="100"/></td>
+            <td><input type="text" id="refresh3" value="0"/></td>
+            <td>
+                <input type="submit" value="Change"/>       
+                <input type="button" onclick="full(3)" value="Fullscreen"/>
+            </td>
+        </tr>
+        </form>
+        <form onsubmit="return change(4);">
+        <tr>
+            <td>4</td>
+            <td><input type="text" id="url4" size="100"/></td>
+            <td><input type="text" id="refresh4" value="0"/></td>
+            <td>
+                <input type="submit" value="Change"/>       
+                <input type="button" onclick="full(4)" value="Fullscreen"/>
+            </td>
+        </tr>
+        </form>
+    </tbody>
+</table>
+</body>
+</html>
