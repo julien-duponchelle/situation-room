@@ -12,16 +12,28 @@ body {
 
 iframe {
     border: 0px solid black;
+    margin: 0px; 
+}
+
+.mosaic {
     width: 49%;
     height: 49%;
-    margin: 0px; 
+    display: inline; 
+}
+
+.fullscreen {
+    width: 99%;
+    height: 99%;
+    display: inline;
+}
+
+.hidden {
+    display: none;
 }
         </style>
 <script src="/socket.io/socket.io.js""></script>
 <script src="/config.js"></script>
 <script src="/jquery-1.6.min.js"></script>
-</head>
-<body>
 <script>
 var socket = new io.Socket("127.0.0.1", {port: SETTINGS.PORT}); 
 socket.connect();
@@ -33,6 +45,7 @@ var refreshIframe = new Array();
 function help() {
     socket.send('Help:');
     socket.send('* load(window, url, refresh_interval) ex: load(0, "http://www.debian.org", 5)');
+    socket.send('* refresh(window)')
     socket.send('* help');
 }
 
@@ -42,9 +55,26 @@ function load(window, src, refresh) {
         refreshIframe[window] = null;
     }
     $('#window' + window).attr('src', src);
-    if (refresh != 0) {
+    if (refresh != 0 && refresh != null) {
         refreshIframe[window] = setInterval("refresh(" + window + ")", refresh * 1000);
     }
+}
+
+function mosaic() {
+    var i = 1;
+    while (i != 5) {
+        $('#window' + i).attr('class', 'mosaic');
+        i = i + 1;
+    }
+}
+
+function fullscreen(window) {
+    var i = 1;
+    while (i != 5) {
+        $('#window' + i).attr('class', 'hidden');
+        i = i + 1;
+    }
+    $('#window' + window).attr('class', 'fullscreen');
 }
 
 function refresh(window) {
@@ -52,9 +82,11 @@ function refresh(window) {
     w.attr('src', w.attr('src'));
 }
 </script>
-        <iframe id="window1" scrolling="no" src="/black"></iframe>
-        <iframe id="window2" scrolling="no" src="/black"></iframe>
-        <iframe id="window3" scrolling="no" src="/black"></iframe>
-        <iframe id="window4" scrolling="no" src="/black"></iframe>
+</head>
+<body>
+        <iframe id="window1" class="mosaic" scrolling="no" src="/black"></iframe>
+        <iframe id="window2" class="mosaic" scrolling="no" src="/black"></iframe>
+        <iframe id="window3" class="mosaic" scrolling="no" src="/black"></iframe>
+        <iframe id="window4" class="mosaic" scrolling="no" src="/black"></iframe>
     </body>
 </html>
