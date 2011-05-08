@@ -18,6 +18,27 @@ Configure
 
 Modify config.js
 
+Usage
+----
+node server.js
+
+Open the browser on http://127.0.0.1:4001
+
+Connect to IRC and send your commands:
+> load(2, 'http://www.openbsd.org')
+> load(1, 'http://www.nagios.org', 5)
+
+This open OpenBSD.org website in 2 second windows of the tactical view and nagios.org in the first window.
+Nagios will be refresh each 5 seconds.
+
+> fullscreen(2)
+
+This display the openbsd.org website in fullscreen mode. 
+
+> mosaic()
+
+This return to the mosaic view.
+
 Licence
 --------
 
