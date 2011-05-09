@@ -15,11 +15,18 @@ var http = require('http'),
 
 var settings = require('./config')
 
+function return_html(response, html) {
+    response.writeHead(200);  
+    response.write(html);  
+    response.end();
+}
+
 console_server = http.createServer(function(request, response) {  
     var uri = url.parse(request.url).pathname;
     if (uri == "/") {
         uri = "/console.html";
     }
+   
     var filename = path.join(process.cwd(), uri);
     path.exists(filename, function(exists) {  
         if(!exists) {  
@@ -45,15 +52,21 @@ console_server = http.createServer(function(request, response) {
 })
 console_server.listen(SETTINGS.CONSOLE_PORT);
 
-monitor_server = http.createServer(function(request, response) {  
-    var uri = url.parse(request.url).pathname;
-    if (uri == "/") {
-        uri = "/index.html";
-    }
-    if (uri == "/black") {
-        response.writeHead(200);  
-        response.write('<html><body style="background-color: black;"></body></html>');  
-        response.end();
+monitor_server = http.createServer(function(request, response) {
+    var u = url.parse(request.url, true);
+    var uri = u.pathname;
+    switch (uri) {
+        case "/":
+            uri = "/index.html";
+        break;
+        
+        case "/black": 
+            return_html(response, '<html><body style="background-color: black;"></body></html>');
+        return;
+
+        case "/image": 
+            html = '<html><style>html {background: url("'+ u.query['u'] +'") no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}"</style><body></body></html>';
+            return_html(response, html);
         return;
     }
     var filename = path.join(process.cwd(), uri);

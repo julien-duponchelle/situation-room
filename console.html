@@ -26,7 +26,12 @@ function full(window) {
 }
 
 function change(window) {
-    socket.send("load(" + window + ", '" + $('#url' + window).val() + "'," + $('#refresh' + window).val()  + ")");
+    if ($('#type' + window).val() == "webpage") {
+        socket.send("load(" + window + ", '" + $('#url' + window).val() + "'," + $('#refresh' + window).val()  + ")");
+    }
+    if ($('#type' + window).val() == "image") {
+        socket.send("load(" + window + ", '/image?u=" + escape($('#url' + window).val()) + "'," + $('#refresh' + window).val()  + ")");
+    }
     return false;
 }
 
@@ -44,6 +49,7 @@ function mosaic() {
             <th>Window</th>
             <th>Url</th>
             <th>Refresh</th>
+            <th>Type</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -54,7 +60,13 @@ function mosaic() {
             <td><input type="text" id="url1" size="100"/></td>
             <td><input type="text" id="refresh1" value="0"/></td>
             <td>
-                <input type="submit" value="Change"/>       
+                <select id="type1">
+                    <option value="webpage">Web page</option>
+                    <option value="image">Image</option>
+                </select>
+            </td>
+            <td>
+                <input type="submit" value="Change"/>    
                 <input type="button" onclick="full(1)" value="Fullscreen"/>
             </td>
         </tr>
@@ -64,6 +76,12 @@ function mosaic() {
             <td>2</td>
             <td><input type="text" id="url2" size="100"/></td>
             <td><input type="text" id="refresh2" value="0"/></td>
+            <td>
+                <select id="type2">
+                    <option value="webpage">Web page</option>
+                    <option value="image">Image</option>
+                </select>
+            </td>
             <td>
                 <input type="submit" value="Change"/>       
                 <input type="button" onclick="full(2)" value="Fullscreen"/>
@@ -76,6 +94,12 @@ function mosaic() {
             <td><input type="text" id="url3" size="100"/></td>
             <td><input type="text" id="refresh3" value="0"/></td>
             <td>
+                <select id="type3">
+                    <option value="webpage">Web page</option>
+                    <option value="image">Image</option>
+                </select>
+            </td>
+            <td>
                 <input type="submit" value="Change"/>       
                 <input type="button" onclick="full(3)" value="Fullscreen"/>
             </td>
@@ -86,6 +110,12 @@ function mosaic() {
             <td>4</td>
             <td><input type="text" id="url4" size="100"/></td>
             <td><input type="text" id="refresh4" value="0"/></td>
+            <td>
+                <select id="type4">
+                    <option value="webpage">Web page</option>
+                    <option value="image">Image</option>
+                </select>
+            </td>
             <td>
                 <input type="submit" value="Change"/>       
                 <input type="button" onclick="full(4)" value="Fullscreen"/>
