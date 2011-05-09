@@ -15,7 +15,7 @@ body {
 <script src="/config.js"></script>
 <script src="/jquery-1.6.min.js"></script>
 <script>
-var socket = new io.Socket("127.0.0.1", {port: SETTINGS.CONSOLE_PORT}); 
+var socket = new io.Socket(SETTINGS.HOST, {port: SETTINGS.CONSOLE_PORT}); 
 socket.connect();
 socket.on('message', function(event) {
 });
