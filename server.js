@@ -11,8 +11,7 @@ var http = require('http'),
     sys = require('sys'),
     fs = require('fs'),
     url = require("url"),  
-    path = require("path"),
-    IRC = require("irc-js")
+    path = require("path")
 
 var settings = require('./config')
 
