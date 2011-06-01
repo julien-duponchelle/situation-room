@@ -18,6 +18,13 @@ body {
 var socket = new io.Socket(SETTINGS.HOST, {port: SETTINGS.CONSOLE_PORT}); 
 socket.connect();
 socket.on('message', function(event) {
+    console.log(event);
+    cmd = JSON.parse(event);
+    var w = $('#url' + cmd['window']);
+    w.val(cmd['url']);
+    w = $('#refresh' + cmd['window']);
+    w.val(cmd['refresh']);
+    $('#type' + cmd['window'] + ' ').val(cmd['cmd']);
 });
 
 function send_command(cmd)
@@ -60,6 +67,23 @@ function mosaic() {
         </tr>
     </thead>
     <tbody>
+        <form onsubmit="return change(0);">
+        <tr>
+            <td>4</td>
+            <td><input type="text" id="url0" size="100"/></td>
+            <td><input type="text" id="refresh0" value="0"/></td>
+            <td>
+                <select id="type0">
+                    <option value="webpage">Web page</option>
+                    <option value="image">Image</option>
+                </select>
+            </td>
+            <td>
+                <input type="submit" value="Change"/>       
+                <input type="button" onclick="full(0)" value="Fullscreen"/>
+            </td>
+        </tr>
+        </form>
         <form onsubmit="return change(1);">
         <tr>
             <td>1</td>
@@ -108,23 +132,6 @@ function mosaic() {
             <td>
                 <input type="submit" value="Change"/>       
                 <input type="button" onclick="full(3)" value="Fullscreen"/>
-            </td>
-        </tr>
-        </form>
-        <form onsubmit="return change(4);">
-        <tr>
-            <td>4</td>
-            <td><input type="text" id="url4" size="100"/></td>
-            <td><input type="text" id="refresh4" value="0"/></td>
-            <td>
-                <select id="type4">
-                    <option value="webpage">Web page</option>
-                    <option value="image">Image</option>
-                </select>
-            </td>
-            <td>
-                <input type="submit" value="Change"/>       
-                <input type="button" onclick="full(4)" value="Fullscreen"/>
             </td>
         </tr>
         </form>

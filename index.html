@@ -73,7 +73,7 @@ function load(window, src, refresh) {
 
 function mosaic() {
     var i = 1;
-    while (i != 5) {
+    while (i != 4) {
         $('#window' + i).attr('class', 'mosaic');
         i = i + 1;
     }
@@ -81,7 +81,7 @@ function mosaic() {
 
 function full(window) {
     var i = 1;
-    while (i != 5) {
+    while (i != 4) {
         $('#window' + i).attr('class', 'hidden');
         i = i + 1;
     }
@@ -95,9 +95,9 @@ function refresh(window) {
 </script>
 </head>
 <body>
+        <iframe id="window0" class="mosaic" scrolling="no" src="/black"></iframe>
         <iframe id="window1" class="mosaic" scrolling="no" src="/black"></iframe>
         <iframe id="window2" class="mosaic" scrolling="no" src="/black"></iframe>
         <iframe id="window3" class="mosaic" scrolling="no" src="/black"></iframe>
-        <iframe id="window4" class="mosaic" scrolling="no" src="/black"></iframe>
     </body>
 </html>

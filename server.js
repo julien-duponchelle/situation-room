@@ -15,6 +15,20 @@ var http = require('http'),
 
 var settings = require('./config')
 
+try {
+    displays = fs.readFileSync("display.json");
+    displays = JSON.parse(displays);
+}
+catch (error) {
+    var displays = [
+        [
+            {
+                windows: []
+            },
+        ],
+    ];
+}
+
 function return_html(response, html) {
     response.writeHead(200);  
     response.write(html);  
@@ -99,8 +113,9 @@ var socket_monitor = io.listen(monitor_server);
 socket_monitor.on('connection', function(client){ 
     sys.puts('Monitor connected');
     monitor = client;
-    client.on('message' , function(event) {
-    });
+    for (var i = 0; i < displays[0].length ; i++) {
+        client.send(JSON.stringify(displays[0][i]));
+    }
     client.on('disconnect', function() {
         monitor = null;
         sys.puts('Monitor disconnected');
@@ -112,11 +127,17 @@ var socket_console = io.listen(console_server);
 socket_console.on('connection', function(client){ 
     sys.puts('Console connected');
     console_client = client;
+    for (var i = 0; i < displays[0].length ; i++) {
+        client.send(JSON.stringify(displays[0][i]));
+    }
     client.on('message' , function(event) {
         console.log(event);
         if (monitor != null) {
             monitor.send(event);
         }
+        cmd = JSON.parse(event);
+        displays[0][cmd['window']] = cmd;
+        fs.writeFile('display.json', JSON.stringify(displays));
     });
     client.on('disconnect', function() {
         console_client = null;
