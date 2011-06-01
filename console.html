@@ -20,23 +20,29 @@ socket.connect();
 socket.on('message', function(event) {
 });
 
-function full(window) {
-    socket.send("full(" + window + ")");
+function send_command(cmd)
+{
+    socket.send(JSON.stringify(cmd));
     return false;
+}
+
+function full(window) {
+    return send_command({cmd: "full", window: window});
 }
 
 function change(window) {
     if ($('#type' + window).val() == "webpage") {
-        socket.send("load(" + window + ", '" + $('#url' + window).val() + "'," + $('#refresh' + window).val()  + ")");
+        return send_command({cmd: "webpage", window: window, url: $('#url' + window).val(), refresh:  $('#refresh' + window).val()});
     }
     if ($('#type' + window).val() == "image") {
+        return send_command({cmd: "image", window: window, url: $('#url' + window).val(), refresh: $('#refresh' + window).val()});
         socket.send("load(" + window + ", '/image?u=" + escape($('#url' + window).val()) + "'," + $('#refresh' + window).val()  + ")");
     }
     return false;
 }
 
 function mosaic() {
-    socket.send("mosaic()");
+    return send_command({cmd: "mosaic"});
 }
 </script>
 </head>

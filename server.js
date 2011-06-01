@@ -32,7 +32,7 @@ console_server = http.createServer(function(request, response) {
         if(!exists) {  
             response.writeHead(404, {"Content-Type": "text/plain"});  
             response.write("404 Not Found\n");  
-            response.end();  
+            response.end();
             return;  
         }  
   

@@ -39,7 +39,24 @@ iframe {
 var socket = new io.Socket(SETTINGS.HOST, {port: SETTINGS.MONITOR_PORT}); 
 socket.connect();
 socket.on('message', function(event) {
-    eval(event);
+    cmd = JSON.parse(event);
+    switch (cmd['cmd']) {
+        case 'full':
+            full(cmd['window']);
+        break;
+
+        case 'mosaic':
+            mosaic();
+        break;
+
+        case 'webpage':
+            load(cmd['window'], cmd['url'], cmd['refresh']);
+        break;
+
+        case 'image':
+            load(cmd['window'], '/image?u=' + cmd['url'], cmd['refresh']);
+        break;
+    }
 });
 var refreshIframe = new Array();
 
