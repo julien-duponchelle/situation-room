@@ -13,7 +13,8 @@ var http = require('http'),
     url = require("url"),  
     path = require("path")
 
-var settings = require('./config')
+var settings = require('./config');
+var consoles = {};
 
 try {
     displays = fs.readFileSync("display.json");
@@ -122,11 +123,10 @@ socket_monitor.on('connection', function(client){
     });
 }); 
 
-var console_client = null;
 var socket_console = io.listen(console_server); 
-socket_console.on('connection', function(client){ 
-    sys.puts('Console connected');
-    console_client = client;
+socket_console.on('connection', function(client) {
+    consoles[client['sessionId']] = client;
+    sys.puts('Console connected (' + Object.keys(consoles).length + ' console connected)');
     for (var i = 0; i < displays[0].length ; i++) {
         client.send(JSON.stringify(displays[0][i]));
     }
@@ -135,13 +135,18 @@ socket_console.on('connection', function(client){
         if (monitor != null) {
             monitor.send(event);
         }
+        for (cons in consoles) {
+            if (cons != client['sessionId']) {
+                consoles[cons].send(event);
+            }
+        }
         cmd = JSON.parse(event);
         displays[0][cmd['window']] = cmd;
         fs.writeFile('display.json', JSON.stringify(displays));
     });
     client.on('disconnect', function() {
-        console_client = null;
-        sys.puts('Console disconnected');
+        delete consoles[client['sessionId']];
+        sys.puts('Console disconnected (' + Object.keys(consoles).length + ' console connected)');
     });
 }); 
 
