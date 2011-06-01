@@ -7,6 +7,13 @@ pilot by the team.
 
 <img src="http://upload.wikimedia.org/wikipedia/commons/4/45/ISS_Flight_Control_Room_2006.jpg" width="800px">
 
+Features
+---------
+
+* Pilot display from multiples computer with real time update
+* X monitors can display the same layout
+
+
 Installation
 -------------
 

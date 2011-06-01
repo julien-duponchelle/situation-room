@@ -15,6 +15,7 @@ var http = require('http'),
 
 var settings = require('./config');
 var consoles = {};
+var monitors = {};
 
 try {
     displays = fs.readFileSync("display.json");
@@ -109,16 +110,18 @@ monitor_server = http.createServer(function(request, response) {
 })
 monitor_server.listen(SETTINGS.MONITOR_PORT);
 
-var monitor = null;
 var socket_monitor = io.listen(monitor_server); 
 socket_monitor.on('connection', function(client){ 
     sys.puts('Monitor connected');
-    monitor = client;
+    if (monitors[0] == undefined) {
+        monitors[0] = {};
+    }
+    monitors[0][client['sessionId']] = client;
     for (var i = 0; i < displays[0].length ; i++) {
         client.send(JSON.stringify(displays[0][i]));
     }
     client.on('disconnect', function() {
-        monitor = null;
+        delete monitors[0][client['sessionId']];
         sys.puts('Monitor disconnected');
     });
 }); 
@@ -132,8 +135,8 @@ socket_console.on('connection', function(client) {
     }
     client.on('message' , function(event) {
         console.log(event);
-        if (monitor != null) {
-            monitor.send(event);
+        for (monitor in monitors[0]) {
+            monitors[0][monitor].send(event);
         }
         for (cons in consoles) {
             if (cons != client['sessionId']) {
