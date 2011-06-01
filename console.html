@@ -72,76 +72,41 @@ function mosaic() {
             <th>Action</th>
         </tr>
     </thead>
-    <tbody>
-        <form onsubmit="return change(0);">
-        <tr>
-            <td>1</td>
-            <td><input type="text" id="url0" size="100"/></td>
-            <td><input type="text" id="refresh0" value="0"/></td>
-            <td>
-                <select id="type0">
-                    <option value="webpage">Web page</option>
-                    <option value="image">Image</option>
-                </select>
-            </td>
-            <td>
-                <input type="submit" value="Change"/>       
-                <input type="button" onclick="full(0)" value="Fullscreen"/>
-            </td>
-        </tr>
-        </form>
-        <form onsubmit="return change(1);">
-        <tr>
-            <td>2</td>
-            <td><input type="text" id="url1" size="100"/></td>
-            <td><input type="text" id="refresh1" value="0"/></td>
-            <td>
-                <select id="type1">
-                    <option value="webpage">Web page</option>
-                    <option value="image">Image</option>
-                </select>
-            </td>
-            <td>
-                <input type="submit" value="Change"/>    
-                <input type="button" onclick="full(1)" value="Fullscreen"/>
-            </td>
-        </tr>
-        </form>
-        <form onsubmit="return change(2);">
-        <tr>
-            <td>3</td>
-            <td><input type="text" id="url2" size="100"/></td>
-            <td><input type="text" id="refresh2" value="0"/></td>
-            <td>
-                <select id="type2">
-                    <option value="webpage">Web page</option>
-                    <option value="image">Image</option>
-                </select>
-            </td>
-            <td>
-                <input type="submit" value="Change"/>       
-                <input type="button" onclick="full(2)" value="Fullscreen"/>
-            </td>
-        </tr>
-        </form>
-        <form onsubmit="return change(3);">
-        <tr>
-            <td>4</td>
-            <td><input type="text" id="url3" size="100"/></td>
-            <td><input type="text" id="refresh3" value="0"/></td>
-            <td>
-                <select id="type3">
-                    <option value="webpage">Web page</option>
-                    <option value="image">Image</option>
-                </select>
-            </td>
-            <td>
-                <input type="submit" value="Change"/>       
-                <input type="button" onclick="full(3)" value="Fullscreen"/>
-            </td>
-        </tr>
-        </form>
+    <tbody id="content">
     </tbody>
 </table>
+<script>
+for (var i = 0; i < 4; i++) {
+    var tr = $('<tr>');
+    tr.append($('<td>').text(i + 1))
+    tr.append(
+        $('<td>').append(
+            $('<input>').attr('type', 'text').attr('id', 'url' + i).attr('size', 100)
+        )
+    );
+    tr.append(
+        $('<td>').append(
+            $('<input>').attr('type', 'text').attr('id', 'refresh' + i).attr('size', 10).val(0)
+        )
+    );
+    tr.append(
+        $('<td>').append(
+            $('<select>')
+                .attr('id', 'type' + i)
+                .append($('<option>').text('Web page').attr('value', 'webpage'))
+                .append($('<option>').text('Image').attr('value', 'image'))
+        )
+    );
+    tr.append(
+        $('<td>')
+            .append(
+                $('<form>').attr('onsubmit', 'return change(' + i + ')')
+                    .append($('<input>').attr('type', 'submit').val('Change'))
+                    .append($('<input>').attr('type', 'button').attr('onclick', 'full(' + i + ')').val('Fullscreen'))
+            )
+    );
+    $('#content').append(tr);
+}
+</script>
 </body>
 </html>

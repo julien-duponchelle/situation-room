@@ -80,7 +80,7 @@ function load(window, src, refresh) {
 }
 
 function mosaic() {
-    var i = 1;
+    var i = 0;
     while (i != 4) {
         $('#window' + i).attr('class', 'mosaic');
         i = i + 1;
@@ -88,7 +88,7 @@ function mosaic() {
 }
 
 function full(window) {
-    var i = 1;
+    var i = 0;
     while (i != 4) {
         $('#window' + i).attr('class', 'hidden');
         i = i + 1;
