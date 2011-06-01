@@ -27,6 +27,12 @@ socket.on('message', function(event) {
     $('#type' + cmd['window'] + ' ').val(cmd['cmd']);
 });
 
+setInterval(function () {
+    if (!socket.connected) {
+        socket.connect();
+    }
+}, 1000);
+
 function send_command(cmd)
 {
     socket.send(JSON.stringify(cmd));

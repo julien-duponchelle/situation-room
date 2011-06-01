@@ -36,7 +36,7 @@ iframe {
 <script src="/config.js"></script>
 <script src="/jquery-1.6.min.js"></script>
 <script>
-var socket = new io.Socket(SETTINGS.HOST, {port: SETTINGS.MONITOR_PORT}); 
+var socket = new io.Socket(SETTINGS.HOST, {port: SETTINGS.MONITOR_PORT, maxReconnectionAttempts: 100000000}); 
 socket.connect();
 socket.on('message', function(event) {
     cmd = JSON.parse(event);
@@ -58,6 +58,14 @@ socket.on('message', function(event) {
         break;
     }
 });
+
+
+setInterval(function () {
+    if (!socket.connected) {
+        socket.connect();
+    }
+}, 1000);
+
 var refreshIframe = new Array();
 
 function load(window, src, refresh) {
