@@ -12,6 +12,7 @@ Features
 
 * Pilot display from multiples computer with real time update
 * X monitors can display the same layout
+* Display images or web page with refresh time
 
 
 Installation
