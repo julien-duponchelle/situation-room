@@ -9,32 +9,57 @@ body {
     background-color: black;
     margin: 0px;
     padding: 0px;
+    height: 100%;
+	width: 100%;
+	overflow: hidden;    
+}
+
+html {
+	width: 100%;
+    height: 100%;    
 }
 
 iframe {
     border: 0px solid black;
-    margin: 0px; 
+    margin: 0px;
+    padding: 0px;
 }
 
 .mosaic {
-    width: 49%;
-    height: 49%;
-    display: inline; 
-}
-
-.fullscreen {
-    width: 99%;
-    height: 99%;
-    display: inline;
+    display: visible;
+    width: 50%;
+    height: 50%;
 }
 
 .hidden {
     display: none;
+    width: 0%;
+    height: 0%;
 }
-        </style>
+
+.fullscreen {
+    display: visible;
+    width: 100%;
+    height: 100%;
+}
+
+#container {
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+}
+</style>
 <script src="/socket.io/socket.io.js""></script>
 <script src="/config.js"></script>
-<script src="/jquery-1.6.min.js"></script>
+<script src="/static/jquery-1.6.min.js"></script>
+<script src="/static/jquery.metadata.js"></script>
+<script src="/static/jquery.sizes.min.js"></script>
+<script src="/static/jlayout.grid.min.js"></script>
+<script src="/static/jlayout.border.min.js"></script>
+<script src="/static/jlayout.flexgrid.min.js"></script>
+<script src="/static/jquery.jlayout.min.js"></script>
 <script>
 var socket = new io.Socket(SETTINGS.HOST, {port: SETTINGS.MONITOR_PORT, maxReconnectionAttempts: 100000000}); 
 socket.connect();
@@ -82,30 +107,62 @@ function load(window, src, refresh) {
 function mosaic() {
     var i = 0;
     while (i != 4) {
-        $('#window' + i).attr('class', 'mosaic');
+        $('#window' + i)
+            .addClass('mosaic')
+            .removeClass('hidden')
+            .removeClass('fullscreen');
         i = i + 1;
     }
+    var gridLayout = jLayout.grid({
+        rows: 2,
+        columns: 2,
+    });
+    gridLayout.layout($('#container'));
 }
 
 function full(window) {
     var i = 0;
     while (i != 4) {
-        $('#window' + i).attr('class', 'hidden');
+        $('#window' + i)
+            .removeClass('mosaic')
+            .addClass('hidden')
+            .removeClass('fullscreen');
         i = i + 1;
     }
-    $('#window' + window).attr('class', 'fullscreen');
+    $('#window' + window)
+        .addClass('fullscreen')
+        .removeClass('hidden')
+        .removeClass('mosaic');
+    var gridLayout = jLayout.grid({
+        rows: 1,
+        columns: 1,
+    });
+    gridLayout.layout($('#container'));
 }
 
 function refresh(window) {
     var w = $('#window' + window);
     w.attr('src', w.attr('src'));
 }
+
+jQuery(function ($) {
+    for (var x = 0; x < 4; x++) {
+        var frame = $('<iframe/>')
+            .attr('scrolling', 'no')
+            .attr('src', '/black')
+            .attr('id', 'window' + x)
+            .addClass('mosaic');
+        $('#container').append(frame);
+    }
+    var gridLayout = jLayout.grid({
+        rows: 2,
+        columns: 2,
+    });
+    gridLayout.layout($('#container'));
+});
 </script>
 </head>
 <body>
-        <iframe id="window0" class="mosaic" scrolling="no" src="/black"></iframe>
-        <iframe id="window1" class="mosaic" scrolling="no" src="/black"></iframe>
-        <iframe id="window2" class="mosaic" scrolling="no" src="/black"></iframe>
-        <iframe id="window3" class="mosaic" scrolling="no" src="/black"></iframe>
-    </body>
+<div id="container"></div>
+</body>
 </html>

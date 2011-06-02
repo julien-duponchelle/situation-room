@@ -144,8 +144,10 @@ socket_console.on('connection', function(client) {
             }
         }
         cmd = JSON.parse(event);
-        displays[0][cmd['window']] = cmd;
-        fs.writeFile('display.json', JSON.stringify(displays));
+        if (cmd['cmd'] != 'full') {
+            displays[0][cmd['window']] = cmd;
+            fs.writeFile('display.json', JSON.stringify(displays));
+        }
     });
     client.on('disconnect', function() {
         delete consoles[client['sessionId']];
