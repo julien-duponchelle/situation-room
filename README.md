@@ -35,6 +35,17 @@ Open the browser which should display the tactical view on http://127.0.0.1:4001
 
 Open the console via http://127.0.0.1:4000
 
+Thanks
+-------
+
+* node.js (http://www.nodejs.org)
+* socket.io (http://socket.io)
+* jquery (http://www.jquery.org)
+* jLayout (http://www.bramstein.com/projects/jlayout/)
+
+
+Also thanks to pyr, daniel and sclo.
+
 Licence
 --------
 
