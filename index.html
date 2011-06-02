@@ -61,10 +61,16 @@ iframe {
 <script src="/static/jlayout.flexgrid.min.js"></script>
 <script src="/static/jquery.jlayout.min.js"></script>
 <script>
+var display=document.URL.split('#')[1];
+if (display == undefined){
+    display = 0;
+}
+
+
 var socket = new io.Socket(SETTINGS.HOST, {port: SETTINGS.MONITOR_PORT, maxReconnectionAttempts: 100000000}); 
 
 socket.on('connect', function() {
-    socket.send(JSON.stringify({'cmd': "connect", display: 0}));
+    socket.send(JSON.stringify({'cmd': "connect", display: display}));
 });
 socket.on('message', function(event) {
     cmd = JSON.parse(event);

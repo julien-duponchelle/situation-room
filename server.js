@@ -123,6 +123,9 @@ socket_monitor.on('connection', function(client){
             if (monitors[display] == undefined) {
                 monitors[display] = {};
             }
+            if (displays[display] == undefined) {
+                displays[display] = {};
+            }
             monitors[display][client['sessionId']] = client;
             for (var i = 0; i < displays[display].length ; i++) {
                 client.send(JSON.stringify(displays[display][i]));
@@ -148,8 +151,8 @@ socket_console.on('connection', function(client) {
     }
     client.on('message' , function(event) {
         console.log(event);
-        for (monitor in monitors[0]) {
-            monitors[0][monitor].send(event);
+        for (monitor in monitors[event['display']]) {
+            monitors[event['display']][monitor].send(event);
         }
         for (cons in consoles) {
             if (cons != client['sessionId']) {
@@ -158,7 +161,7 @@ socket_console.on('connection', function(client) {
         }
         cmd = JSON.parse(event);
         if (cmd['cmd'] != 'full') {
-            displays[0][cmd['window']] = cmd;
+            displays[event['display']][cmd['window']] = cmd;
             fs.writeFile('display.json', JSON.stringify(displays));
         }
     });

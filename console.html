@@ -35,6 +35,7 @@ setInterval(function () {
 
 function send_command(cmd)
 {
+    cmd['display'] = 0;
     socket.send(JSON.stringify(cmd));
     return false;
 }
