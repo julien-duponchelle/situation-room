@@ -113,15 +113,28 @@ monitor_server.listen(SETTINGS.MONITOR_PORT);
 var socket_monitor = io.listen(monitor_server); 
 socket_monitor.on('connection', function(client){ 
     sys.puts('Monitor connected');
-    if (monitors[0] == undefined) {
-        monitors[0] = {};
-    }
-    monitors[0][client['sessionId']] = client;
-    for (var i = 0; i < displays[0].length ; i++) {
-        client.send(JSON.stringify(displays[0][i]));
-    }
+    client.on('message', function(event) {
+        console.log(event);
+        cmd = JSON.parse(event);
+        if (cmd['cmd'] == 'connect') {
+            display = cmd['display'];
+            sys.puts('Monitor connected to display ' + display);
+            client.display = display;
+            if (monitors[display] == undefined) {
+                monitors[display] = {};
+            }
+            monitors[display][client['sessionId']] = client;
+            for (var i = 0; i < displays[display].length ; i++) {
+                client.send(JSON.stringify(displays[display][i]));
+            }
+        }
+    });
+
+
     client.on('disconnect', function() {
-        delete monitors[0][client['sessionId']];
+        if (client.display) {
+            delete monitors[client.display][client['sessionId']];
+        }
         sys.puts('Monitor disconnected');
     });
 }); 
