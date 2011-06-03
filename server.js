@@ -146,8 +146,10 @@ var socket_console = io.listen(console_server);
 socket_console.on('connection', function(client) {
     consoles[client['sessionId']] = client;
     sys.puts('Console connected (' + Object.keys(consoles).length + ' console connected)');
-    for (var i = 0; i < displays[0].length ; i++) {
-        client.send(JSON.stringify(displays[0][i]));
+    for (display in displays) {
+        for (window in displays[display]) {
+            client.send(JSON.stringify(displays[display][window]));
+        }
     }
     client.on('message' , function(event) {
         console.log(event);

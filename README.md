@@ -24,14 +24,15 @@ Situation Room allows you to display multiple web pages on a single monitor.  It
 
 * `node server.js`
 * By default, the tactical view will be available at `http://127.0.0.1:4001`
+* By default, the second tactical view will be available at `http://127.0.0.1:4001#1`
 * By default, the control console will be available at `http://127.0.0.1:4000`
 
 ## Thanks
 
 The following projects :
 
-* node.js
-* socket.io
+* [node.js](http://nodejs.org)
+* [socket.io](http://socket.io)
 * [jQuery](http://www.jquery.org)
 * [jLayout](http://www.bramstein.com/projects/jlayout/)
 
