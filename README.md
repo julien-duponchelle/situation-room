@@ -2,12 +2,12 @@
 
 Situation Room allows you to display multiple web pages on a single monitor.  It is intended to create ersatz tactical overviews for display; for example, a combination of [Graphite](http://graphite.wikidot.com/) and [Nagios](http://www.nagios.org/) views that can provide a rapid, real-time overview of your ecosystem.
 
-<img src="http://www.ibc.tvtechnology.com/uploadedImages/TV_Technology/The_Reference_Room/eo-MULTIVIEWERS1.jpg">
+<img src="http://i.imgur.com/HOzOA.jpg">
 
 ## Features
 
 * Simple web interface to control which pages or images are being displayed.
-* Multiple monitor support.
+* Multiple monitor support (mirroring _or_ individual displays).
 * Auto-refresh feature, configurable per resource.
 
 ## Pre-requisites
@@ -31,7 +31,7 @@ Situation Room allows you to display multiple web pages on a single monitor.  It
 The following projects :
 
 * node.js
-* socket.io,
+* socket.io
 * [jQuery](http://www.jquery.org)
 * [jLayout](http://www.bramstein.com/projects/jlayout/)
 
