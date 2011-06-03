@@ -7,8 +7,7 @@ Situation Room allows you to display multiple web pages on a single monitor.  It
 ## Features
 
 * Simple web interface to control which pages or images are being displayed.
-* Multiple monitor support.
-** Mirroring _or_ individual displays.
+* Multiple monitor support (mirroring _or_ individual displays).
 * Auto-refresh feature, configurable per resource.
 
 ## Pre-requisites
