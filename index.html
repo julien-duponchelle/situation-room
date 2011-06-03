@@ -88,7 +88,7 @@ socket.on('message', function(event) {
         break;
 
         case 'image':
-            load(cmd['window'], '/image?u=' + cmd['url'], cmd['refresh']);
+            load(cmd['window'], '/image?u=' + escape(cmd['url']), cmd['refresh']);
         break;
     }
 });

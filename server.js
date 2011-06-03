@@ -151,17 +151,17 @@ socket_console.on('connection', function(client) {
     }
     client.on('message' , function(event) {
         console.log(event);
-        for (monitor in monitors[event['display']]) {
-            monitors[event['display']][monitor].send(event);
+        cmd = JSON.parse(event);
+        for (monitor in monitors[cmd['display']]) {
+            monitors[cmd['display']][monitor].send(event);
         }
         for (cons in consoles) {
             if (cons != client['sessionId']) {
                 consoles[cons].send(event);
             }
         }
-        cmd = JSON.parse(event);
-        if (cmd['cmd'] != 'full') {
-            displays[event['display']][cmd['window']] = cmd;
+        if (cmd['cmd'] != 'full' && cmd['window']) {
+            displays[cmd['display']][cmd['window']] = cmd;
             fs.writeFile('display.json', JSON.stringify(displays));
         }
     });

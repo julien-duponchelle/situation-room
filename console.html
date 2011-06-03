@@ -50,7 +50,6 @@ function change(window) {
     }
     if ($('#type' + window).val() == "image") {
         return send_command({cmd: "image", window: window, url: $('#url' + window).val(), refresh: $('#refresh' + window).val()});
-        socket.send("load(" + window + ", '/image?u=" + escape($('#url' + window).val()) + "'," + $('#refresh' + window).val()  + ")");
     }
     return false;
 }
