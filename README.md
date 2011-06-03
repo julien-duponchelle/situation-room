@@ -29,12 +29,14 @@ Situation Room allows you to display multiple web pages on a single monitor.  It
 ## Thanks
 
 The following projects :
+
 * node.js
 * socket.io,
 * [jQuery](http://www.jquery.org)
 * [jLayout](http://www.bramstein.com/projects/jlayout/)
 
 The following people :
+
 * [pyr](http://github.com/pyr/)
 * [Daniel](http://github.com/phrawzty/)
 * Sclo
