@@ -40,6 +40,17 @@ Sample monitor view with a video at top left, two graph image and a webpage:
 * By default, the second tactical view will be available at `http://127.0.0.1:4001#1`
 * By default, the control console will be available at `http://127.0.0.1:4000`
 
+## Changelog
+
+0.3:
+* Support videos
+
+0.2:
+* Support multiple display
+
+0.1:
+* Initial version
+
 ## Thanks
 
 The following projects :
