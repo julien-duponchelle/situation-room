@@ -76,10 +76,6 @@ monitor_server = http.createServer(function(request, response) {
             uri = "/index.html";
         break;
         
-        case "/black": 
-            return_html(response, '<html><body style="background-color: black;"></body></html>');
-        return;
-
         case "/image": 
             html = '<html><style>html {background: url("'+ u.query['u'] +'") no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;}"</style><body></body></html>';
             return_html(response, html);

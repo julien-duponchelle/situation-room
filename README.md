@@ -35,6 +35,7 @@ The following projects :
 * [socket.io](http://socket.io)
 * [jQuery](http://www.jquery.org)
 * [jLayout](http://www.bramstein.com/projects/jlayout/)
+* [fullScreenBG](http://github.com/conzett/jquery.fullScreenBG)
 
 The following people :
 

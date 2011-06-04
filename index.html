@@ -88,7 +88,7 @@ socket.on('message', function(event) {
         break;
 
         case 'image':
-            load(cmd['window'], '/image?u=' + escape(cmd['url']), cmd['refresh']);
+            load(cmd['window'], '/static/image.html?u=' + escape(cmd['url']), cmd['refresh']);
         break;
     }
 });
@@ -158,7 +158,7 @@ jQuery(function ($) {
     for (var x = 0; x < 4; x++) {
         var frame = $('<iframe/>')
             .attr('scrolling', 'no')
-            .attr('src', '/black')
+            .attr('src', '/static/black.html')
             .attr('id', 'window' + x)
             .addClass('mosaic');
         $('#container').append(frame);
