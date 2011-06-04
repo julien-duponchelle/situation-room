@@ -90,6 +90,10 @@ socket.on('message', function(event) {
         case 'image':
             load(cmd['window'], '/static/image.html?u=' + escape(cmd['url']), cmd['refresh']);
         break;
+
+        case 'video':
+            load(cmd['window'], '/static/video.html?u=' + escape(cmd['url']), cmd['refresh']);
+        break;
     }
 });
 

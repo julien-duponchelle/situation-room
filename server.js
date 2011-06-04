@@ -158,7 +158,7 @@ socket_console.on('connection', function(client) {
                 consoles[cons].send(event);
             }
         }
-        if (cmd['cmd'] != 'full' && cmd['window']) {
+        if (cmd['cmd'] != 'full' && cmd['window'] != undefined) {
             displays[cmd['display']][cmd['window']] = cmd;
             fs.writeFile('display.json', JSON.stringify(displays));
         }

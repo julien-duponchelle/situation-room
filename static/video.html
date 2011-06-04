@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+body {
+    background-color: black;
+    margin: 0px;
+    padding: 0px;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+}
+</style>
+<script src="/static/jquery-1.6.min.js"></script>
+<script src="/static/util.js"></script>
+<script>
+jQuery(function ($) {
+    $('#container').append(
+        $("<video>")
+            .attr("autoplay", "true")
+            .attr("loop", "true")
+            .attr("src", getQueryArg('u'))
+    );
+});
+</script>
+<body id="container">
+</body>
+</html>
+

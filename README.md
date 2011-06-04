@@ -6,7 +6,7 @@ Situation Room allows you to display multiple web pages on a single monitor.  It
 
 ## Features
 
-* Simple web interface to control which pages or images are being displayed.
+* Simple web interface to control which pages, images or videos are being displayed.
 * Multiple monitor support (mirroring _or_ individual displays).
 * Auto-refresh feature, configurable per resource.
 
@@ -15,6 +15,7 @@ Situation Room allows you to display multiple web pages on a single monitor.  It
 * [Node.js](http://nodejs.org/)
 * [NPM](http://npmjs.org/)
 * [Socket.io](http://socket.io/)
+* A modern browser
 
 ## Configure
 
