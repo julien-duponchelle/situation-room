@@ -5,9 +5,11 @@ It is intended to create ersatz tactical overviews for display; for example, a c
 It can also be use to pilot monitors in a shop in order to display ads.
 
 Console view:
+
 <img src="http://github.com/noplay/situation-room/blob/master/images/console.png?raw=true"/>
 
 Sample monitor view with a video at top left, two graph image and a webpage:
+
 <img src="http://github.com/noplay/situation-room/blob/master/images/monitor.png?raw=true"/>
 
 ## Features
