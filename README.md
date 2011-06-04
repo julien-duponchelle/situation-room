@@ -27,7 +27,7 @@ Sample monitor view with a video at top left, two graph image and a webpage:
 
 ## Download
 
-0.3: http://github.com/noplay/situation-room/zipball/0.3
+0.3.1: http://github.com/noplay/situation-room/zipball/0.3.1
 
 ## Configure
 
@@ -42,7 +42,11 @@ Sample monitor view with a video at top left, two graph image and a webpage:
 
 ## Changelog
 
+0.3.1:
+* Fix a little parse error thanks to nico
+
 0.3:
+
 * Support videos
 
 0.2:
@@ -66,6 +70,7 @@ The following people :
 * [pyr](http://github.com/pyr/)
 * [Daniel](http://github.com/phrawzty/)
 * Sclo
+* @warpdesign_
 
 ## Licence
 
