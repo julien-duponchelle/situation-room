@@ -24,7 +24,7 @@ socket.on('message', function(event) {
     w.val(cmd['url']);
     w = $('#refresh_' + cmd['display'] + '_' + cmd['window']);
     w.val(cmd['refresh']);
-    $('#type' + cmd['display'] + '_' + cmd['window'] + ' ').val(cmd['cmd']);
+    $('#type_' + cmd['display'] + '_' + cmd['window']).val(cmd['cmd']);
 });
 
 setInterval(function () {
