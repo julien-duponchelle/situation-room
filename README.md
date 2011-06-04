@@ -1,8 +1,14 @@
 # Situation Room
 
-Situation Room allows you to display multiple web pages on a single monitor.  It is intended to create ersatz tactical overviews for display; for example, a combination of [Graphite](http://graphite.wikidot.com/) and [Nagios](http://www.nagios.org/) views that can provide a rapid, real-time overview of your ecosystem.
+Situation Room allows you to display multiple web pages on a single monitor.
+It is intended to create ersatz tactical overviews for display; for example, a combination of [Graphite](http://graphite.wikidot.com/) and [Nagios](http://www.nagios.org/) views that can provide a rapid, real-time overview of your ecosystem.
+It can also be use to pilot monitors in a shop in order to display ads.
 
-<img src="http://i.imgur.com/HOzOA.jpg">
+Console view:
+<img src="http://github.com/noplay/situation-room/blob/master/images/console.png?raw=true"/>
+
+Sample monitor view with a video at top left, two graph image and a webpage:
+<img src="http://github.com/noplay/situation-room/blob/master/images/monitor.png?raw=true"/>
 
 ## Features
 
