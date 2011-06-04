@@ -25,6 +25,10 @@ Sample monitor view with a video at top left, two graph image and a webpage:
 * [Socket.io](http://socket.io/)
 * A modern browser
 
+## Download
+
+0.3: http://github.com/noplay/situation-room/zipball/0.3
+
 ## Configure
 
 * Play with `config.js` as necessary.
