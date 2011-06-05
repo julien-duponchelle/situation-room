@@ -11,114 +11,116 @@ body {
     font-size: 15px;
 }
 </style>
-<script src="/socket.io/socket.io.js""></script>
-<script src="/config.js"></script>
-<script src="/static/jquery-1.6.min.js"></script>
-<script>
-var socket = new io.Socket(SETTINGS.HOST, {port: SETTINGS.CONSOLE_PORT}); 
-socket.connect();
-socket.on('message', function(event) {
-    console.log(event);
-    cmd = JSON.parse(event);
-    var w = $('#url_' + cmd['display'] + '_' + cmd['window']);
-    w.val(cmd['url']);
-    w = $('#refresh_' + cmd['display'] + '_' + cmd['window']);
-    w.val(cmd['refresh']);
-    $('#type_' + cmd['display'] + '_' + cmd['window']).val(cmd['cmd']);
-});
+<script type="text/javascript" src="/socket.io/socket.io.js""></script>
+<script type="text/javascript" src="/config.js"></script>
+<script type="text/javascript" src="/static/jquery-1.6.min.js"></script>
+<script type="text/javascript">
+	var socket = new io.Socket(SETTINGS.HOST, {port: SETTINGS.CONSOLE_PORT}); 
+	socket.connect();
+	socket.on('message', function(event) {
+		console.log(event);
+		cmd = JSON.parse(event);
+		var w = $('#url_' + cmd['display'] + '_' + cmd['window']);
+		w.val(cmd['url']);
+		w = $('#refresh_' + cmd['display'] + '_' + cmd['window']);
+		w.val(cmd['refresh']);
+		$('#type_' + cmd['display'] + '_' + cmd['window']).val(cmd['cmd']);
+	});
 
-setInterval(function () {
-    if (!socket.connected) {
-        socket.connect();
-    }
-}, 1000);
+	setInterval(function () {
+		if (!socket.connected) {
+			socket.connect();
+		}
+	}, 1000);
 
-function send_command(cmd)
-{
-    socket.send(JSON.stringify(cmd));
-    return false;
-}
+	function send_command(cmd)
+	{
+		socket.send(JSON.stringify(cmd));
+		return false;
+	}
 
-function full(display, window) {
-    return send_command({cmd: "full", display: display, window: window});
-}
+	function full(display, window) {
+		return send_command({cmd: "full", display: display, window: window});
+	}
 
-function change(display, window) {
-    return send_command({
-        cmd: $('#type_' + display + '_' + window).val(),
-        display: display,
-        window: window,
-        url: $('#url_' + display + '_' + window).val(),
-        refresh: $('#refresh_' + display + '_' + window).val()
-    });
-    return false;
-}
+	function change(display, window) {
+		return send_command({
+			cmd: $('#type_' + display + '_' + window).val(),
+			display: display,
+			window: window,
+			url: $('#url_' + display + '_' + window).val(),
+			refresh: $('#refresh_' + display + '_' + window).val()
+		});
+		return false;
+	}
 
-function mosaic(display) {
-    return send_command({display: display, cmd: "mosaic"});
-}
+	function mosaic(display) {
+		return send_command({display: display, cmd: "mosaic"});
+	}
+
+	$(function() {
+		for (var display = 0; display < SETTINGS.DISPLAYS; display++) {
+			$('#content').append($('<h2>').text('Display ' + display));
+			$('#content').append($('<input>')
+				.attr('type', "button")
+				.attr("onclick","mosaic("+display+")")
+				.attr("value","Mosaic"));
+
+			var table = $('<table>');
+			table.append($('<thead>')
+				.append($('<tr>')
+					.append($('<th>').text('Window'))          
+					.append($('<th>').text('Url'))        
+					.append($('<th>').text('Refresh'))            
+					.append($('<th>').text('Type'))
+					.append($('<th>').text('Action'))            
+			));
+
+			var tbody = $('<tbody>');
+			table.append(tbody);
+
+			for (var i = 0; i < 4; i++) {
+				var tr = $('<tr>');
+				tr.append($('<td>').text(i + 1))
+				tr.append(
+					$('<td>').append(
+						$('<input>').attr('type', 'text').attr('id', 'url_' + display + '_' + i).attr('size', 150)
+					)
+				);
+				tr.append(
+					$('<td>').append(
+						$('<input>').attr('type', 'text').attr('id', 'refresh_' + display + '_' + i).attr('size', 10).val(0)
+					)
+				);
+				tr.append(
+					$('<td>').append(
+						$('<select>')
+							.attr('id', 'type_' + display + '_' + i)
+							.append($('<option>').text('Web page').attr('value', 'webpage'))
+							.append($('<option>').text('Image').attr('value', 'image'))
+							.append($('<option>').text('Video').attr('value', 'video'))
+					)
+				);
+				tr.append(
+					$('<td>')
+						.append(
+							$('<form>').attr('onsubmit', 'return change(' + display + ',' + i + ')')
+								.append($('<input>').attr('type', 'submit').val('Change'))
+								.append($('<input>').attr('type', 'button').attr('onclick', 'full(' + display + ',' + i + ')').val('Fullscreen'))
+						)
+				);
+				tbody.append(tr);
+			}
+			$('#content').append(table);
+		}
+	});
 </script>
 </head>
 <body>
 <h1>Situation Room</h1>
 <div id="content"></div>
-<script>
-for (var display = 0; display < SETTINGS.DISPLAYS; display++) {
-    $('#content').append($('<h2>').text('Display ' + display));
-    $('#content').append($('<input>')
-        .attr('type', "button")
-        .attr("onclick","mosaic("+display+")")
-        .attr("value","Mosaic"));
-    var table = $('<table>');
-    table.append($('<thead>')
-        .append($('<tr>')
-            .append($('<th>').text('Window'))          
-            .append($('<th>').text('Url'))        
-            .append($('<th>').text('Refresh'))            
-            .append($('<th>').text('Type'))
-            .append($('<th>').text('Action'))            
-    ));
-
-    var tbody = $('<tbody>');
-    table.append(tbody);
-
-    for (var i = 0; i < 4; i++) {
-        var tr = $('<tr>');
-        tr.append($('<td>').text(i + 1))
-        tr.append(
-            $('<td>').append(
-                $('<input>').attr('type', 'text').attr('id', 'url_' + display + '_' + i).attr('size', 150)
-            )
-        );
-        tr.append(
-            $('<td>').append(
-                $('<input>').attr('type', 'text').attr('id', 'refresh_' + display + '_' + i).attr('size', 10).val(0)
-            )
-        );
-        tr.append(
-            $('<td>').append(
-                $('<select>')
-                    .attr('id', 'type_' + display + '_' + i)
-                    .append($('<option>').text('Web page').attr('value', 'webpage'))
-                    .append($('<option>').text('Image').attr('value', 'image'))
-                    .append($('<option>').text('Video').attr('value', 'video'))
-            )
-        );
-        tr.append(
-            $('<td>')
-                .append(
-                    $('<form>').attr('onsubmit', 'return change(' + display + ',' + i + ')')
-                        .append($('<input>').attr('type', 'submit').val('Change'))
-                        .append($('<input>').attr('type', 'button').attr('onclick', 'full(' + display + ',' + i + ')').val('Fullscreen'))
-                )
-        );
-        tbody.append(tr);
-    }
-    $('#content').append(table);
-}
-</script>
-<br>
-<br>
+<br />
+<br />
 Version 0.3.1
 </body>
 </html>

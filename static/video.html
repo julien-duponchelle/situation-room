@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>
+    <style type="text/css">
 body {
     background-color: black;
     margin: 0px;
@@ -15,12 +15,12 @@ video {
     height: 100%;
 }
 </style>
-<script src="/static/jquery-1.6.min.js"></script>
-<script src="/static/util.js"></script>
-<script>
+<script type="text/javascript" src="/static/jquery-1.6.min.js"></script>
+<script type="text/javascript" src="/static/util.js"></script>
+<script type="text/javascript">
 jQuery(function ($) {
     $('#container').append(
-        $("<video>")
+        $("<video/>")
             .attr("autoplay", "true")
             .attr("loop", "true")
             .attr("src", getQueryArg('u'))
