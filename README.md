@@ -1,20 +1,26 @@
 # Situation Room
 
-Situation Room allows you to display multiple web pages on a single monitor.
-It is intended to create ersatz tactical overviews for display; for example, a combination of [Graphite](http://graphite.wikidot.com/) and [Nagios](http://www.nagios.org/) views that can provide a rapid, real-time overview of your ecosystem.
-It can also be use to pilot monitors in a shop in order to display ads.
+Situation Room allows you to display multiple web resources on a single monitor.
+
+Possible use cases:
+
+* Create ersatz tactical overviews for display; for example, a combination of [Graphite](http://graphite.wikidot.com/) and [Nagios](http://www.nagios.org/) views that can provide a rapid, real-time overview of your ecosystem.
+* Display advertisements or other information across multiple monitors in a retail setting.
+
+## Screenshots
 
 Console view:
 
 <img src="http://github.com/noplay/situation-room/blob/master/images/console.png?raw=true"/>
 
-Sample monitor view with a video at top left, two graph image and a webpage:
+Sample monitor view with a video at top left, two graph images, and a webpage:
 
 <img src="http://github.com/noplay/situation-room/blob/master/images/monitor.png?raw=true"/>
 
 ## Features
 
-* Simple web interface to control which pages, images or videos are being displayed.
+* Simple web interface to control which resources are being displayed.
+* Support for web pages, individual images, and videos.
 * Multiple monitor support (mirroring _or_ individual displays).
 * Auto-refresh feature, configurable per resource.
 
@@ -23,11 +29,11 @@ Sample monitor view with a video at top left, two graph image and a webpage:
 * [Node.js](http://nodejs.org/)
 * [NPM](http://npmjs.org/)
 * [Socket.io](http://socket.io/)
-* A modern browser
+* A modern browser such as [Chrome](http://www.google.com/chrome)
 
 ## Download
 
-0.3.1: http://github.com/noplay/situation-room/zipball/0.3.1
+* 0.3.1: http://github.com/noplay/situation-room/zipball/0.3.1
 
 ## Configure
 
@@ -43,17 +49,20 @@ Sample monitor view with a video at top left, two graph image and a webpage:
 ## Changelog
 
 0.3.1:
-* Fix a little parse error thanks to nico
+
+* Fix a little parse error thanks to Nico.
 
 0.3:
 
-* Support videos
+* Support videos.
 
 0.2:
-* Support multiple display
+
+* Support multiple display.
 
 0.1:
-* Initial version
+
+* Initial version.
 
 ## Thanks
 
@@ -70,7 +79,7 @@ The following people :
 * [pyr](http://github.com/pyr/)
 * [Daniel](http://github.com/phrawzty/)
 * Sclo
-* @warpdesign_
+* [Nico](https://twitter.com/#!/warpdesign_)
 
 ## Licence
 
