@@ -114,7 +114,7 @@ function load(window, src, refresh) {
         clearInterval(refreshIframe[window] );
         refreshIframe[window] = null;
     }
-    $('#window' + window).attr('src', src);
+    $('#window' + window).attr('src', encodeURI(src));
     if (refresh != 0 && refresh != null) {
         refreshIframe[window] = setInterval("refresh(" + window + ")", refresh * 1000);
     }
