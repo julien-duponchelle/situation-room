@@ -49,6 +49,7 @@ Sample monitor view with a video at top left, two graph images, and a webpage:
 ## Changelog
 
 0.3.2:
+
 * Fix quote issues
 * Background images
 * Cosmetic improvements
