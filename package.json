@@ -1,0 +1,18 @@
+{
+  "author": "Julien Duponchelle <julien@duponchelle.info>",
+  "name": "situation-room",
+  "description": "Pilot a tactical dashboard in a browser from another browser",
+  "version": "0.3.1",
+  "homepage": "https://github.com/noplay/situation-room",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/noplay/situation-room.git"
+  },
+  "engines": {
+    "node": "~0.6.2"
+  },
+  "dependencies": {
+    "socket.io": "0.8.7"
+    },
+  "devDependencies": {}
+}
