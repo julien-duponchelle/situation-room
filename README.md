@@ -33,7 +33,7 @@ Sample monitor view with a video at top left, two graph images, and a webpage:
 
 ## Download
 
-* 0.3.1: http://github.com/noplay/situation-room/zipball/0.3.1
+* 0.3.2: http://github.com/noplay/situation-room/zipball/0.3.2
 
 ## Configure
 
@@ -47,6 +47,12 @@ Sample monitor view with a video at top left, two graph images, and a webpage:
 * By default, the control console will be available at `http://127.0.0.1:4000`
 
 ## Changelog
+
+0.3.2:
+* Fix quote issues
+* Background images
+* Cosmetic improvements
+
 
 0.3.1:
 
@@ -73,6 +79,8 @@ The following projects :
 * [jQuery](http://www.jquery.org)
 * [jLayout](http://www.bramstein.com/projects/jlayout/)
 * [fullScreenBG](http://github.com/conzett/jquery.fullScreenBG)
+
+Background image Vincent Klaiber (Attribution 3.0 Unported (CC BY 3.0)) (http://subtlepatterns.com/?p=852)
 
 The following people :
 
