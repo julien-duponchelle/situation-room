@@ -107,7 +107,7 @@ monitor_server = http.createServer(function(request, response) {
 monitor_server.listen(SETTINGS.MONITOR_PORT);
 
 var socket_monitor = io.listen(monitor_server); 
-socket_monitor.on('connection', function(client){ 
+socket_monitor.sockets.on('connection', function(client){ 
     sys.puts('Monitor connected');
     client.on('message', function(event) {
         console.log(event);
@@ -139,7 +139,7 @@ socket_monitor.on('connection', function(client){
 }); 
 
 var socket_console = io.listen(console_server); 
-socket_console.on('connection', function(client) {
+socket_console.sockets.on('connection', function(client) {
     consoles[client['sessionId']] = client;
     sys.puts('Console connected (' + Object.keys(consoles).length + ' console connected)');
     for (display in displays) {

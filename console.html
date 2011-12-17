@@ -15,8 +15,7 @@ body {
 <script type="text/javascript" src="/config.js"></script>
 <script type="text/javascript" src="/static/jquery-1.6.min.js"></script>
 <script type="text/javascript">
-	var socket = new io.Socket(SETTINGS.HOST, {port: SETTINGS.CONSOLE_PORT}); 
-	socket.connect();
+	var socket = io.connect(); 
 	socket.on('message', function(event) {
 		console.log(event);
 		cmd = JSON.parse(event);
@@ -29,7 +28,7 @@ body {
 
 	setInterval(function () {
 		if (!socket.connected) {
-			socket.connect();
+			socket = io.connect();
 		}
 	}, 1000);
 

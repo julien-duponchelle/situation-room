@@ -66,43 +66,46 @@ if (display == undefined){
     display = 0;
 }
 
+var socket = undefined;
 
-var socket = new io.Socket(SETTINGS.HOST, {port: SETTINGS.MONITOR_PORT, maxReconnectionAttempts: 100000000}); 
+function init_websocket() {
+    socket = io.connect(); 
 
-socket.on('connect', function() {
-    socket.send(JSON.stringify({'cmd': "connect", display: display}));
-});
-socket.on('message', function(event) {
-    cmd = JSON.parse(event);
-    switch (cmd['cmd']) {
-        case 'full':
-            full(cmd['window']);
-        break;
+    socket.on('connect', function() {
+        socket.send(JSON.stringify({'cmd': "connect", display: display}));
+    });
+    socket.on('message', function(event) {
+        cmd = JSON.parse(event);
+        switch (cmd['cmd']) {
+            case 'full':
+                full(cmd['window']);
+            break;
 
-        case 'mosaic':
-            mosaic();
-        break;
+            case 'mosaic':
+                mosaic();
+            break;
 
-        case 'webpage':
-            load(cmd['window'], cmd['url'], cmd['refresh']);
-        break;
+            case 'webpage':
+                load(cmd['window'], cmd['url'], cmd['refresh']);
+            break;
 
-        case 'image':
-            load(cmd['window'], '/static/image.html?u=' + escape(cmd['url']), cmd['refresh']);
-        break;
+            case 'image':
+                load(cmd['window'], '/static/image.html?u=' + escape(cmd['url']), cmd['refresh']);
+            break;
 
-        case 'video':
-            load(cmd['window'], '/static/video.html?u=' + escape(cmd['url']), cmd['refresh']);
-        break;
-    }
-});
+            case 'video':
+                load(cmd['window'], '/static/video.html?u=' + escape(cmd['url']), cmd['refresh']);
+            break;
+        }
+    });
 
 
-setInterval(function () {
-    if (!socket.connected) {
-        socket.connect();
-    }
-}, 1000);
+    setInterval(function () {
+        if (!socket.connected) {
+            io.connect();
+        }
+    }, 1000);
+}
 
 var refreshIframe = new Array();
 
@@ -171,7 +174,7 @@ jQuery(function ($) {
         rows: 2,
         columns: 2,
     });
-    gridLayout.layout($('#container'));
+    init_websocket();
 });
 </script>
 </head>
