@@ -11,11 +11,11 @@ Possible use cases:
 
 Console view:
 
-<img src="http://github.com/noplay/situation-room/blob/master/images/console.png?raw=true"/>
+<img src="https://github.com/noplay/situation-room/blob/master/images/console.png?raw=true"/>
 
 Sample monitor view with a video at top left, two graph images, and a webpage:
 
-<img src="http://github.com/noplay/situation-room/blob/master/images/monitor.png?raw=true"/>
+<img src="https://github.com/noplay/situation-room/blob/master/images/monitor.png?raw=true"/>
 
 ## Features
 
